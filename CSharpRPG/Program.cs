@@ -2,11 +2,14 @@
 
 namespace CSharpRPG
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Game game = new Game();
+            game.Run();
         }
     }
 }
+
+
