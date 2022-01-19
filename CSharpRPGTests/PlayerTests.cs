@@ -6,8 +6,14 @@ using Xunit;
 
 namespace CSharpRPGTests
 {
-    public class PlayerEquipmentTests
+    public class PlayerTests
     {
+        /* |------------------------------------|
+         * |Equip weapon level test for players |
+         * |------------------------------------|
+         *  Player should only be able to equip weapon
+         *  if the weapon level requirement is met.
+         */
         [Fact]
         public void Player_can_equip_weapon_level_test()
         {
@@ -26,6 +32,14 @@ namespace CSharpRPGTests
             Assert.False(bWeaponLvl2);
         }
 
+        /* |----------------------------------------------------|
+         * |Equip weapon type test for all the different classes|
+         * |----------------------------------------------------|
+         *  Mages can equip Staffs and Wands.
+         *  Warriors can equip Swords, Hammers and Axes.
+         *  Rogues can equip Daggers and Swords.
+         *  Rangers can only equip Bows.
+         */
         [Fact]
         public void Mage_can_equip_weapon_type_test()
         {
@@ -162,8 +176,100 @@ namespace CSharpRPGTests
             Assert.False(bHammer);
             Assert.False(bAxe);
             Assert.False(bStaff);
-            Assert.False(bWand);
-            
+            Assert.False(bWand); 
+        }
+
+        /* |----------------------------------------|
+         * |Level test for all the different classes|
+         * |----------------------------------------|
+         *  Mages start at int 8, str 1, dex 1 and gain int 5, str 1, dex 1 on level up.
+         *  Warrior start at int 1, str 5, dex 2 and gain int 1, str 3, dex 2 on level up.
+         *  Rogue start at int 1, str 2, dex 6 and gain int 1, str 1 dex 4 on level up.
+         *  Ranger start at int 1, str 1, dex 7 and gain int 1, str 1, dex 5 on level up.
+         */
+        [Fact]
+        public void Mage_level_up_test()
+        {
+            // Arrange
+            // Character
+            Player player = new Mage("CharacterName");
+            // Act
+            player.LevelUp();
+            int expectedIntellect = 13;
+            int expectedStrength = 2;
+            int expectedDexterity = 2;
+
+            int actualIntellect = player.Intellect;
+            int actualStrength = player.Strength;
+            int actualDexterity = player.Dexterity;
+
+            // Assert
+            Assert.Equal(expectedIntellect, actualIntellect);
+            Assert.Equal(expectedStrength, actualStrength);
+            Assert.Equal(expectedDexterity, actualDexterity);
+        }
+        [Fact]
+        public void Warrior_level_up_test()
+        {
+            // Arrange
+            // Character
+            Player player = new Warrior("CharacterName");
+            // Act
+            player.LevelUp();
+            int expectedIntellect = 2;
+            int expectedStrength = 8;
+            int expectedDexterity = 4;
+
+            int actualIntellect = player.Intellect;
+            int actualStrength = player.Strength;
+            int actualDexterity = player.Dexterity;
+
+            // Assert
+            Assert.Equal(expectedIntellect, actualIntellect);
+            Assert.Equal(expectedStrength, actualStrength);
+            Assert.Equal(expectedDexterity, actualDexterity);
+        }
+        [Fact]
+        public void Rogue_level_up_test()
+        {
+            // Arrange
+            // Character
+            Player player = new Rogue("CharacterName");
+            // Act
+            player.LevelUp();
+            int expectedIntellect = 2;
+            int expectedStrength = 3;
+            int expectedDexterity = 10;
+
+            int actualIntellect = player.Intellect;
+            int actualStrength = player.Strength;
+            int actualDexterity = player.Dexterity;
+
+            // Assert
+            Assert.Equal(expectedIntellect, actualIntellect);
+            Assert.Equal(expectedStrength, actualStrength);
+            Assert.Equal(expectedDexterity, actualDexterity);
+        }
+        [Fact]
+        public void Ranger_level_up_test()
+        {
+            // Arrange
+            // Character
+            Player player = new Ranger("CharacterName");
+            // Act
+            player.LevelUp();
+            int expectedIntellect = 2;
+            int expectedStrength = 2;
+            int expectedDexterity = 12;
+
+            int actualIntellect = player.Intellect;
+            int actualStrength = player.Strength;
+            int actualDexterity = player.Dexterity;
+
+            // Assert
+            Assert.Equal(expectedIntellect, actualIntellect);
+            Assert.Equal(expectedStrength, actualStrength);
+            Assert.Equal(expectedDexterity, actualDexterity);
         }
     }
 }
