@@ -1,4 +1,8 @@
-﻿using CSharpRPG.Classes;
+﻿using CSharpRPG.Players.Classes;
+using CSharpRPG.Items.Weapons;
+using CSharpRPG.Items.Armors;
+using CSharpRPG.Players;
+using CSharpRPG.Enemies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +24,8 @@ namespace CSharpRPG
             Console.WriteLine();
             
             Player player = CreateCharacter();
+           
+            WeaponList wl = new WeaponList();
             
             running = true; 
                 
@@ -40,7 +46,7 @@ namespace CSharpRPG
             
             if(input == "1")
             {
-                Console.WriteLine("Menu item 1");
+                Fight(_player, "Some monster");
             }
             if(input == "2")
             {
@@ -61,6 +67,30 @@ namespace CSharpRPG
             }
         }
         
+        public static void Fight(Player _player, string _enemyName)
+        {
+            Enemy _enemy = new Enemy(_enemyName, _player);
+            while (_enemy.Health > 0 && _player.Health > 0)
+            {
+                Console.WriteLine($"Player hp: {_player.Health}/{_player.MaxHealth} | Enemy hp: {_enemy.Health}");
+                Console.WriteLine("1: Attack | 2: Use Potion | 3: Flee ");
+                string input = Console.ReadLine();
+                if(input == "1")
+                {
+                    Console.WriteLine($"You did {_player.GetDamage()} to {_enemy.Name}");
+                    _enemy.Health -= _player.GetDamage();
+                    _player.Health -= _enemy.Damage;
+                }
+                if(input == "2")
+                {
+                    _player.UsePotion();
+                }
+                if(input == "3")
+                {
+                    break;
+                }
+            }
+        }
 
         public static Player CreateCharacter()
         {

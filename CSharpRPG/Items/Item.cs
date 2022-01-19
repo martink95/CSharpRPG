@@ -1,10 +1,11 @@
-﻿using System;
+﻿using CSharpRPG.Players;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSharpRPG
+namespace CSharpRPG.Items
 {
     public class Item
     {
@@ -28,11 +29,12 @@ namespace CSharpRPG
             Dexterity = _dex;
         }
 
-        public bool checkWearable(Player _player)
+        public bool CanEquipLevel(Player _player, Item _item)
         {
-            if (_player.Level >= Level) return true;
+            if (_player.Level >= _item.Level) return true;
             else return false;
         }
+
 
     }
 }
