@@ -246,6 +246,11 @@ namespace CSharpRPG
             return player;
         }
 
+        /// <summary>
+        /// TestFunction to test for InvalidWeaponException and InvalidArmorException when equipping items.
+        /// The exception will return a message and -> level: false/true type: false/true.
+        /// </summary>
+        /// <param name="input"></param>
         public void TestFunction(string input)
         {
 
