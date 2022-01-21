@@ -1,24 +1,23 @@
-# csharprpg
+# CSharpRPG
 
 
 First assignment for C# Fundamentals at Noroff
 
 ## Table of Contents
 
-- [Install](#install)
-- [Usage](#usage)
-- [Maintainers](#maintainers)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Install
 
 ```
+Git clone https://github.com/martink95/CSharpRPG.git
 ```
 
 ## Usage
 
 ```
+Game.Run(); Lets you play the game.
+
+Game.TestFunction(string input); Takes either WeaponLevel, WeaponType, ArmorLevel or ArmorType as argument to test for Exceptions.
 ```
 
 ## Maintainers
