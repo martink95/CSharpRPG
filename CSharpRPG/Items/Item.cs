@@ -29,10 +29,17 @@ namespace CSharpRPG.Items
             Dexterity = _dex;
         }
 
+        /// <summary>
+        /// CanEquipLevel checks if the Players level meet the item requirement.
+        /// If the Player meets the level requirement it returns true, if not it returns false.
+        /// </summary>
+        /// <param name="_player"></param>
+        /// <param name="_item"></param>
+        /// <returns></returns>
         public bool CanEquipLevel(Player _player, Item _item)
         {
             if (_player.Level >= _item.Level) return true;
-            else return false;
+            return false;
         }
 
 

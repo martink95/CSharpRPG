@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CSharpRPG.Exceptions;
 
 namespace CSharpRPG.Items.Armors
 {
@@ -15,51 +16,35 @@ namespace CSharpRPG.Items.Armors
             ArmorValue = _armorValue;
         }
 
+        /// <summary>
+        /// CanEquipArmor checks if the Players class can equip that type of armor.
+        /// If the Player can equip the armor it returns true, if not it returns false.
+        /// </summary>
+        /// <param name="_player"></param>
+        /// <param name="_armor"></param>
+        /// <returns></returns>
         public bool CanEquipArmor(Player _player, Armor _armor)
         {
-
             if (_player.ClassName == "Warrior")
             {
                 if (_armor.Type == "Mail" || _armor.Type == "Plate") return true;
-                else
-                {
-                    //Throw a custom exception
-
-                    return false;
-                }
             }
+
             if (_player.ClassName == "Mage")
             {
                 if (_armor.Type == "Cloth") return true;
-                else
-                {
-                    //Throw a custom exception
-
-                    return false;
-                }
             }
+
             if (_player.ClassName == "Rogue")
             {
                 if (_armor.Type == "Mail" || _armor.Type == "Leather") return true;
-                else
-                {
-                    //Throw a custom exception
-
-                    return false;
-                }
             }
+
             if (_player.ClassName == "Ranger")
             {
                 if (_armor.Type == "Mail" || _armor.Type == "Leather") return true;
-                else
-                {
-                    //Throw a custom exception
-
-                    return false;
-                }
             }
 
-            // Throw error, because item may not be any of the above types (or class might be wrong).
             return false;
         }
     }

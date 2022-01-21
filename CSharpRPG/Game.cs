@@ -14,6 +14,10 @@ namespace CSharpRPG
     public class Game
     {
         private bool running = false;
+        /// <summary>
+        /// Run provides the user with a welcome message, then creates a Player with the CreateCharacter() method.
+        /// When a player is created the user is provided with a menu while the program is running.
+        /// </summary>
         public void Run()
         {
             Console.WriteLine("#################");
@@ -22,10 +26,8 @@ namespace CSharpRPG
             Console.WriteLine("#      Game     #");
             Console.WriteLine("#################");
             Console.WriteLine();
-            
+
             Player player = CreateCharacter();
-           
-            WeaponList wl = new WeaponList();
             
             running = true; 
                 
@@ -35,18 +37,24 @@ namespace CSharpRPG
                 string input = Console.ReadLine();
                 
                 Menu(input, player);
-
             }
             
         }
 
+        /// <summary>
+        /// Menu takes in the users input to provide the user with the ability to do actions.
+        /// it takes in the player object and use it to either fight, print inventory or print stats.
+        /// user is also given the option to exit the application.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="_player"></param>
         public static void Menu(string input, Player _player)
         {
             Player player = _player;
             
             if(input == "1")
             {
-                Fight(_player, "Some monster");
+                Fight(_player, _enemyName: "Some monster");
             }
             if(input == "2")
             {
@@ -67,6 +75,14 @@ namespace CSharpRPG
             }
         }
         
+        /// <summary>
+        /// Fight takes in the player object and a string for the enemy name.
+        /// It creates an enemy with the given name and enemy object based on players level.
+        /// The user the provides input to either fight the monster and deal dmg, use potion or flee.
+        /// If the user is above level 3 and enemies health reaches 0 or below the user is provided with a weapon or armor drop.
+        /// </summary>
+        /// <param name="_player"></param>
+        /// <param name="_enemyName"></param>
         public static void Fight(Player _player, string _enemyName)
         {
             Enemy _enemy = new Enemy(_enemyName, _player);
@@ -90,8 +106,108 @@ namespace CSharpRPG
                     break;
                 }
             }
+
+            if (_enemy.Health <= 0)
+            {
+                _player.LevelUp();
+
+                if (_player.Level >= 3)
+                {
+                    Random rnd = new Random();
+                    int dropType = rnd.Next(2);
+                    if (dropType == 1) GetWeaponDrop(_player);
+                    else GetArmorDrop(_player);
+                }
+            }
         }
 
+        /// <summary>
+        /// GetArmorDrop returns an armor which can be equipped by the player.
+        /// It provides the user with information about what dropped, and gives the user the decision to equip or not.
+        /// </summary>
+        /// <param name="_player"></param>
+        public static void GetArmorDrop(Player _player)
+        {
+            Armor[] al = new ArmorList().GetList();
+            bool canEquip = false;
+            Armor armorDrop = null;
+
+            while (!canEquip)
+            {
+                Random rnd = new Random();
+                int drop = rnd.Next(al.Length);
+                bool canEquipType = al[drop].CanEquipArmor(_player, al[drop]);
+                bool canEquipLvl = al[drop].CanEquipLevel(_player, al[drop]);
+
+                if (canEquipLvl && canEquipType)
+                {
+                    canEquip = true;
+                }
+
+                armorDrop = al[drop];
+            }
+            Console.WriteLine();
+            Console.WriteLine("----------------------");
+            Console.WriteLine($"You got a drop!");
+            Console.WriteLine($"Name: {armorDrop.Name} | lvl: {armorDrop.Level} | type: {armorDrop.Type}");
+            Console.WriteLine($"Slot: {armorDrop.Slot} | Defense: {armorDrop.ArmorValue}");
+            Console.WriteLine($"Int: {armorDrop.Intellect} | Str: {armorDrop.Strength} | Dex: {armorDrop.Dexterity}");
+            Console.WriteLine("----------------------");
+
+            Console.WriteLine("Want to equip this item? 1: yes | 2: no");
+            string input = Console.ReadLine();
+
+            if (input == "1") _player.EquipArmor(_player, armorDrop);
+            if (input == "2") return;
+        }
+        /// <summary>
+        /// GetWeaponDrop returns a weapon which can be equipped by the player.
+        /// It provides the user with information about what dropped, and gives the user the decision to equip or not.
+        /// </summary>
+        /// <param name="_player"></param>
+        public static void GetWeaponDrop(Player _player)
+        {
+            
+                Weapon[] wl = new WeaponList().GetList();
+                bool canEquip = false;
+                Weapon weaponDrop = null;
+
+                while (!canEquip)
+                {
+                    Random rnd = new Random();
+                    int drop = rnd.Next(wl.Length);
+                    bool canEquipType = wl[drop].CanEquipWeapon(_player, wl[drop]);
+                    bool canEquipLvl = wl[drop].CanEquipLevel(_player, wl[drop]);
+
+                    if (canEquipLvl && canEquipType)
+                    {
+                        canEquip = true;
+                    }
+
+                    weaponDrop = wl[drop];
+                }
+
+                Console.WriteLine();
+                Console.WriteLine("----------------------");
+                Console.WriteLine($"You got a drop!");
+                Console.WriteLine($"Name: {weaponDrop.Name} | lvl: {weaponDrop.Level} | type: {weaponDrop.Type}");
+                Console.WriteLine($"Dmg: {weaponDrop.Damage} | Att. speed: {weaponDrop.AttackSpeed}");
+                Console.WriteLine($"Int: {weaponDrop.Intellect} | Str: {weaponDrop.Strength} | Dex: {weaponDrop.Dexterity}");
+                Console.WriteLine("----------------------");
+
+                Console.WriteLine("Want to equip this item? 1: yes | 2: no");
+                string input = Console.ReadLine();
+
+                if (input == "1") _player.EquipWeapon(_player, weaponDrop);
+                if (input == "2") return;
+
+        }
+
+        /// <summary>
+        /// CreateCharacter uses the console to get the users name and their chosen class.
+        /// It then creates the player class based on input given by user and returns the player.
+        /// </summary>
+        /// <returns></returns>
         public static Player CreateCharacter()
         {
             Console.WriteLine("Please enter your name:");
@@ -128,8 +244,6 @@ namespace CSharpRPG
                     break;
                 }
             }
-
-            
             return player;
         }
     }

@@ -16,10 +16,10 @@ namespace CSharpRPG.Players.Classes
             Intellect = 1;
             Strength  = 2;
             Dexterity = 6;
-            Weapon = new Weapon("Wooden Dagger", "Weapon", "Dagger", 1, 0, 0, 2, 7.0, 1.6);
-            HeadArmor = new Armor("Leather Starter Head", "Head", "Leather", 1, 0, 0, 1, 6);
-            BodyArmor = new Armor("Leather Starter Robe", "Body", "Leather", 1, 0, 0, 2, 9);
-            LegArmor = new Armor("Leather Starter Legs", "Leg", "Leather", 1, 0, 0, 1, 5);
+            Weapon = new Weapon(_name: "Wooden Dagger", _slot: "Weapon", _type: "Dagger", _lvl: 1, _int: 0, _str: 0, _dex: 2, _dmg: 7.0, _aspeed: 1.6);
+            HeadArmor = new Armor(_name: "Leather Starter Head", _slot: "Head", _type: "Leather", _lvl: 1, _int: 0, _str: 0, _dex: 1, _armorValue: 6);
+            BodyArmor = new Armor(_name: "Leather Starter Robe", _slot: "Body", _type: "Leather", _lvl: 1, _int: 0, _str: 0, _dex: 2, _armorValue: 9);
+            LegArmor = new Armor(_name: "Leather Starter Legs", _slot: "Leg", _type: "Leather", _lvl: 1, _int: 0, _str: 0, _dex: 1, _armorValue: 5);
         }   
     }
 }
