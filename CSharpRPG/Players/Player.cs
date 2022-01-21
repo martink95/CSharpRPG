@@ -169,7 +169,7 @@ namespace CSharpRPG.Players
                     _player.LegArmor = _armor;
                 }
             }
-            else throw new InvalidArmorException($"not allowed to use that armor");
+            else throw new InvalidArmorException($"not allowed to use that armor | level {lvlReq} type: {typeReq}");
 
         }
 

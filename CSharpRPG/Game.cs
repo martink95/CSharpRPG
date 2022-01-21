@@ -38,7 +38,6 @@ namespace CSharpRPG
                 
                 Menu(input, player);
             }
-            
         }
 
         /// <summary>
@@ -245,6 +244,38 @@ namespace CSharpRPG
                 }
             }
             return player;
+        }
+
+        public void TestFunction(string input)
+        {
+
+            Player player = new Mage("TestChar");
+
+            if (input == "WeaponType")
+            {
+                Weapon weapon = new Weapon("TestWeapon", "Weapon", "Axe", 1, 0, 0, 0, 0, 0);
+                player.EquipWeapon(player, weapon);
+            }
+
+            if (input == "ArmorType")
+            {
+                Armor armor = new Armor("TestArmor", "Head", "Mail", 1, 0, 0, 0, 0);
+                player.EquipArmor(player, armor);
+            }
+
+            if (input == "WeaponLevel")
+            {
+                Weapon weapon = new Weapon("TestWeapon", "Weapon", "Staff", 2, 0, 0, 0, 0, 0);
+                player.EquipWeapon(player, weapon);
+            }
+
+            if (input == "ArmorLevel")
+            {
+                Armor armor = new Armor("TestArmor", "Head", "Cloth", 2, 0, 0, 0, 0);
+                player.EquipArmor(player, armor);
+            }
+
+
         }
     }
  

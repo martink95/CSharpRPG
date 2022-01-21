@@ -9,6 +9,14 @@ namespace CSharpRPG
         {
             Game game = new Game();
             game.Run();
+
+            /*
+            game.TestFunction("WeaponType");
+            game.TestFunction("WeaponLevel");
+            game.TestFunction("ArmorType");
+            game.TestFunction("ArmorLevel");
+            */
+
         }
     }
 }
