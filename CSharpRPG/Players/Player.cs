@@ -201,8 +201,6 @@ namespace CSharpRPG.Players
             {
                 double totalStrength = Strength + HeadArmor.Strength + BodyArmor.Strength + LegArmor.Strength + Weapon.Strength;
                 dmg = Weapon.DamagePerSecond * (1 + totalStrength / 100);
-                Console.WriteLine(1+totalStrength/100);
-                Console.WriteLine(dmg);
             }
             return (int)dmg;
         }
