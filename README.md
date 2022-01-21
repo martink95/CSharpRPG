@@ -17,7 +17,8 @@ Git clone https://github.com/martink95/CSharpRPG.git
 ```
 Game.Run(); Lets you play the game.
 
-Game.TestFunction(string input); Takes either WeaponLevel, WeaponType, ArmorLevel or ArmorType as argument to test for Exceptions.
+Game.TestFunction(string input);
+Takes either WeaponLevel, WeaponType, ArmorLevel or ArmorType as argument to test for Exceptions.
 ```
 
 ## Maintainers
